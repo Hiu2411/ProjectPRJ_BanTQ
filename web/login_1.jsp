@@ -1,25 +1,15 @@
 <%-- 
-    Document   : shoppingcart
+    Document   : login
     Created on : April 20, 2022, 9:51:14 PM
     Author     : hieuh
 --%>
 
-<%@page import="java.text.DecimalFormat"%>
-<%@page import="Controller.ProductModel"%>
-<%@page import="Model.Item"%>
-<%@page import="Model.Cart"%>
-<%@page import="Model.Image"%>
-<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%
-    Cart obj = new Cart();
-    double total = 0;
-    ProductModel pm = new ProductModel();
-    ArrayList<Item> list = (ArrayList<Item>) session.getAttribute("cart");
-
-
+session.invalidate();
 %>
+<!DOCTYPE html>
+
 
 <head>
     <meta charset="UTF-8">
@@ -50,7 +40,7 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Header Section Begin -->
+   <!-- Header Section Begin -->
     <header class="header-section">
         <div class="header-top">
             <div class="container">
@@ -63,17 +53,7 @@
                     </div>
                 </div>
                 <div class="ht-right">
-                    <%
-                        if(session.getAttribute("login")== null){
-                    %>
                     <a href="login.jsp" class="login-panel"><i class="fa fa-user"></i>Login</a>
-                    <%
-                        }else{
-                    %>
-                    <a href="login.jsp" class="login-panel"><i class="fa fa-user"></i>Logout</a>
-                    <%
-                        }
-                    %>
                     <div class="top-social">
                         <a href=""><i class="ti-facebook"></i></a>
                         <a href="#"><i class="ti-twitter-alt"></i></a>
@@ -130,11 +110,11 @@
                         <li><a href="./contact.jsp">Contact</a></li>
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
-                                <li   class="active"><a href="./shoppingcart.jsp">Shopping Cart</a></li>
+                                <li><a href="./shoppingcart.jsp">Shopping Cart</a></li>
                                 <li ><a href="./checkout.jsp">Checkout</a></li>
                                 <li><a href="./Blog.jsp">Blog</a></li>
                                 <li><a href="./register.jsp">Register</a></li>
-                                <li><a href="./login.jsp">Login</a></li>
+                                <li   class="active"><a href="./login.jsp">Login</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -150,103 +130,105 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="breadcrumb-text product-more">
-                        <a href="./home.jsp"><i class="fa fa-home"></i> Home</a>
-                        <a href="./shop.jsp">Shop</a>
-                        <span>Shopping Cart</span>
+                    <div class="breadcrumb-text">
+                        <a href="#"><i class="fa fa-home"></i> Home</a>
+                        <span>Login</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Breadcrumb Section Begin -->
+    <!-- Breadcrumb Form Section Begin -->
 
-    <!-- Shopping Cart Section Begin -->
-    <section class="shopping-cart spad">
+    <!-- Register Section Begin -->
+    <div class="register-login-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-
-                    <div class="cart-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Product Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th><i class="ti-close"></i></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%for (Item item : list) {
-                                    DecimalFormat formatter = new DecimalFormat("###,###,###");
-
-                                 String price = formatter.format(item.getPrice());
-                                 String price2 = formatter.format(item.getPrice() * item.getQuality());
-                                %>
-                            <td class="cart-pic"><img src="images/<%=pm.getImage(item.getProductId())%>.jpg" alt=""></td>
-                            <td class="cart-title first-row">
-                                <h5><%=item.getProductName()%></h5>
-                            </td>
-                            <td class="p-price first-row"><%=price%></td>
-                            <td class="qua-col first-row">
-                                <div class="quantity">
-                                    <div >
-                                        <a ><%=item.getQuality()%></a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="total-price first-row"><%=price2%> vnd</td>
-                            <%
-                                total += item.getPrice()*item.getQuality();
-                                
-                            %>
-                            <td class="close-td first-row">
-                                <form action="CartDelete" method="POST">
-                                <input hidden="" name="ID" value="<%=item.getProductId()%>">
-                                <button type="submit" class="close-td first-row"><i class="ti-close"></i></button>
-                                </form>
-                            </td>
-                            </tr>
-                            <%}%>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="cart-buttons">
-                                <a href="shop.jsp" class="primary-btn continue-shop">Continue shopping</a>
-                                <a href="shoppingcart.jsp" class="primary-btn up-cart">Update cart</a>
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="login-form">
+                        <h2>Login</h2>
+                        <form action="UserLoginServlet" method="POST">
+                            <div class="group-input">
+                                <label>Username *</label>
+                                <input type="text" name="username">
                             </div>
+                            <div class="group-input">
+                                <label>Password *</label>
+                                <input type="password" name="pass">
+                            </div>
+                            <button type="submit" class="site-btn login-btn">Sign In</button>
+                        </form>
+                        <script>
+
+                            function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+                                console.log('statusChangeCallback');
+                                console.log(response);                   // The current login status of the person.
+                                if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+                                   
+                                    testAPI();
+                                } else {                                 // Not logged into your webpage or we are unable to tell.
+                                    document.getElementById('status').innerHTML = 'Please log ' +
+                                            'into this webpage.';
+                                }
+                            }
+
+
+                            function checkLoginState() {               // Called when a person is finished with the Login Button.
+                                FB.getLoginStatus(function (response) {   // See the onlogin handler
+                                    statusChangeCallback(response);
+
+                                });
+                            }
+
+
+                            window.fbAsyncInit = function () {
+                                FB.init({
+                                    appId: '{2665531046998908}',
+                                    cookie: true, // Enable cookies to allow the server to access the session.
+                                    xfbml: true, // Parse social plugins on this webpage.
+                                    version: '{api-version}'           // Use this Graph API version for this call.
+                                });
+
+
+                                FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
+                                    statusChangeCallback(response);        // Returns the login status.
+                                });
+                            };
+
+                            function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+                                console.log('Welcome!  Fetching your information.... ');
+                                FB.api('/me', function (response) {
+                                    console.log('Successful login for: ' + response.name);
+
+
+                                    document.getElementById('status').innerHTML =
+                                            'Thanks for logging in, ' + response.name + '!';
+                                });
+                            }
+
+                        </script>
+
+
+                        <!-- The JS SDK Login Button -->
+                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=2665531046998908" nonce="UpBS4Pet"></script>
+                        <div class="fb-login-button" data-size="small" data-button-type="continue_with" data-layout="rounded" data-auto-logout-link="true" data-use-continue-as="true"  data-width="" ></div>
+
+
+                        <div id="status">
                         </div>
-                        <div class="col-lg-4 offset-lg-4">
-                            <div class="proceed-checkout">
-                                <ul>
-                                    <%
-                                    if(total>1000000){
-                                        total=total*90/100;
-                                        %>
-                                    <li class="cart-total">Total is discounted 10%</li>
-                                    <%}
-                                        DecimalFormat formatter = new DecimalFormat("###,###,###");
 
-                                         String price1 = formatter.format(total);
-                                    %>
-                                    <br>
-                                    <li class="cart-total">Total <span><%=price1%> vnd</span></li>
-                                </ul>
-                                <a href="checkout.jsp" class="proceed-btn">PROCEED TO CHECK OUT</a>
-                            </div>
+                        <!-- Load the JS SDK asynchronously -->
+                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+                        <div class="switch-login">
+                            <a href="./register.jsp" class="or-login">Or Create An Account</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Shopping Cart Section End -->
+    </div>
+    <!-- Register Form Section End -->
+
 
 
     <!-- Footer Section Begin -->
@@ -258,10 +240,10 @@
                         <div class="footer-logo">
                             <a href="#"><img src="img/logo.png" alt=""></a>
                         </div>
-                       <ul>
+                        <ul>
                             <li>Address: Luong Son, Hoa Binh</li>
-                            <li>Phone: +84 369730803</li>
-                            <li>Email: hieutdce153410@fpt.edu.vn</li>
+                        <li>Phone: +84 369730803</li>
+                        <li>Email: hieutdce153410@fpt.edu.vn</li>
                         </ul>
                         <div class="footer-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -317,6 +299,7 @@
         </div>
     </footer>
     <!-- Footer Section End -->
+
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
