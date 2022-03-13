@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT/Spring%202022/PRJ301/ProjectPRJ_BanTQ/src/java/DAO/Account.java</file>
-            <file>file:/D:/FPT/Spring%202022/PRJ301/ProjectPRJ_BanTQ/web/login.jsp</file>
+            <file>file:/D:/FPT/Spring%202022/PRJ301/ProjectPRJ_BanTQ/web/ManagerProduct.jsp</file>
+            <file>file:/D:/FPT/Spring%202022/PRJ301/ProjectPRJ_BanTQ/src/java/Model/AdminException.java</file>
+            <file>file:/D:/FPT/Spring%202022/PRJ301/ProjectPRJ_BanTQ/src/java/Model/Admin.java</file>
+            <file>file:/D:/FPT/Spring%202022/PRJ301/ProjectPRJ_BanTQ/web/colection.jsp</file>
+            <file>file:/D:/FPT/Spring%202022/PRJ301/ProjectPRJ_BanTQ/src/java/Model/CustomerException.java</file>
         </group>
     </open-files>
 </project-private>
