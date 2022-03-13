@@ -1,10 +1,11 @@
 <%-- 
     Document   : index
-    Created on : Jun 22, 2020, 8:51:02 AM
-    Author     : DINH
+    Created on : April 20, 2022, 9:51:14 PM
+    Author     : hieuh
 --%>
 
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="Model.Item"%>
 <%@page import="Model.Product"%>
 <%@page import="java.util.ArrayList"%>
@@ -62,7 +63,17 @@
                     </div>
                 </div>
                 <div class="ht-right">
+                    <%
+                        if(session.getAttribute("login")== null){
+                    %>
                     <a href="login.jsp" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                    <%
+                        }else{
+                    %>
+                    <a href="login.jsp" class="login-panel"><i class="fa fa-user"></i>Logout</a>
+                    <%
+                        }
+                    %>
                     <div class="top-social">
                         <a href=""><i class="ti-facebook"></i></a>
                         <a href="#"><i class="ti-twitter-alt"></i></a>
@@ -221,6 +232,9 @@
                 <div class="product-slider owl-carousel">
                     <%
                         for (int i = 0; i < list.size(); i++) {
+                            DecimalFormat formatter = new DecimalFormat("###,###,###");
+
+                            String price = formatter.format(list.get(i).getPrice());
                     %>
                     <div class="product-item">
                         <div class="pi-pic">
@@ -234,8 +248,9 @@
                             <a href="product.jsp?pID=<%=list.get(i).getProductId()%>">
                                 <h5><%=list.get(i).getProductName()%></h5>
                             </a>
+                            
                             <div class="product-price">
-                                <%=list.get(i).getPrice()%> vnd
+                                <%=price%> vnd
                             </div>
                         </div>
                     </div>
@@ -264,6 +279,9 @@
             <div class="product-slider owl-carousel">
                 <%
                     for (int i = 0; i < list1.size(); i++) {
+                        DecimalFormat formatter = new DecimalFormat("###,###,###");
+
+                            String price = formatter.format(list1.get(i).getPrice());
                 %>
                 <div class="product-item">
                     <div class="pi-pic">
@@ -278,7 +296,7 @@
                             <h5><%=list1.get(i).getProductName()%></h5>
                         </a>
                         <div class="product-price">
-                            <%=list1.get(i).getPrice()%> vnd
+                            <%=price%> vnd
                         </div>
                     </div>
                 </div>
@@ -315,6 +333,9 @@
                 <div class="product-slider owl-carousel">
                     <%
                         for (int i = 0; i < list2.size(); i++) {
+                             DecimalFormat formatter = new DecimalFormat("###,###,###");
+
+                            String price = formatter.format(list1.get(i).getPrice());
                     %>
                     <div class="product-item">
                         <div class="pi-pic">
@@ -329,7 +350,7 @@
                                 <h5><%=list2.get(i).getProductName()%></h5>
                             </a>
                             <div class="product-price">
-                                <%=list2.get(i).getPrice()%> vnd
+                                <%=price%> vnd
                             </div>
                         </div>
                     </div>

@@ -1,10 +1,13 @@
 <%-- 
     Document   : login
-    Created on : Jun 22, 2020, 9:54:33 AM
-    Author     : DINH
+    Created on : April 20, 2022, 9:51:14 PM
+    Author     : hieuh
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+session.invalidate();
+%>
 <!DOCTYPE html>
 
 
