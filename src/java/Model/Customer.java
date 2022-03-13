@@ -77,6 +77,43 @@ public class Customer {
         this.status = status;
     }
 
+    public Customer(int customerId, String fullName, String address, String email, int gender, String phone, int status, String username, String password, int roleID) {
+        this.customerId = customerId;
+        this.fullName = fullName;
+        this.address = address;
+        this.email = email;
+        this.gender = gender;
+        this.phone = phone;
+        this.status = status;
+        this.username = username;
+        this.password = password;
+        this.roleID = roleID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getRoleID() {
+        return roleID;
+    }
+
+    public void setRoleID(int roleID) {
+        this.roleID = roleID;
+    }
+
     public Customer() {
     }
 
@@ -88,5 +125,8 @@ public class Customer {
     private int gender;
     private String phone;
     private int status;
+    private String username;
+    private String password;
+    private int roleID;
 
 }

@@ -1,7 +1,7 @@
 <%-- 
     Document   : Seach
-    Created on : Jul 19, 2020, 11:27:05 AM
-    Author     : DINH
+    Created on : April 20, 2022, 9:51:14 PM
+    Author     : hieuh
 --%>
 
 <%@page import="Model.Product"%>
@@ -58,7 +58,17 @@
                     </div>
                 </div>
                 <div class="ht-right">
+                    <%
+                        if(session.getAttribute("login")== null){
+                    %>
                     <a href="login.jsp" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                    <%
+                        }else{
+                    %>
+                    <a href="login.jsp" class="login-panel"><i class="fa fa-user"></i>Logout</a>
+                    <%
+                        }
+                    %>
                     <div class="top-social">
                         <a href=""><i class="ti-facebook"></i></a>
                         <a href="#"><i class="ti-twitter-alt"></i></a>

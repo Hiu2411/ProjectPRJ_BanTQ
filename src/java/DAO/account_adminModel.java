@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import Model.Admin;
 import Model.AdminException;
+import Model.Customer;
 /**
  * DINH
  *
@@ -210,25 +211,25 @@ public class account_adminModel {
      * @throws SQLException
      * @throws AccountAdminException
      */
-    public ArrayList<Admin> getPadding(int page, String search, String sortColumn) throws SQLException, AdminException {
-        //phan trang
-        int totalAcc = getNumberOfAcc(page, search, sortColumn);
-        int totalPage = (int) Math.ceil(totalAcc / numberPage);
-        int index = (page) * numberPage;
+    public ArrayList<Customer> getPadding(int page, String search, String sortColumn) throws SQLException, AdminException {
+        ArrayList<Customer> list = new ArrayList<>();
         String sqlStr = "";
-        sqlStr += "SELECT TOP "+index+" * FROM admin";
-
-        if (search != "") {
-            sqlStr += " WHERE (admin.fullName LIKE '%" + search + "%')";
-        }
-
-        
+        sqlStr += "SELECT [customerId]\n" +
+                    "      ,[fullName]\n" +
+                    "      ,[address]\n" +
+                    "      ,[email]\n" +
+                    "      ,[gender]\n" +
+                    "      ,[phone]\n" +
+                    "      ,[username]\n" +
+                    "      ,[password]\n" +
+                    "      ,[roleID]\n" +
+                    "      ,[status]\n" +
+                    "  FROM [Project_PRJ].[dbo].[customer]";
         this.st = this.con.createStatement();
         this.rs = this.st.executeQuery(sqlStr);
-        acc = new ArrayList<Admin>();
 
         while (rs.next()) {
-                    int id = rs.getInt("adminId");
+                    int id = rs.getInt("customerId");
                     String name = rs.getString("fullName");
                     String user = rs.getString("username");
                     String pass = rs.getString("password");
@@ -237,15 +238,14 @@ public class account_adminModel {
                     String email = rs.getString("email");
                     int status = rs.getInt("status");
                     if (status != 0) {
-                        acc.add(new Admin(id, name, user, pass, phone, add, email, status));
-                        acc.get(acc.size() - 1).setFullName(name);
+                        list.add(new Customer(id, name, add, email, 1, phone, status, user, pass, 1));
                     }
 
                 
             }
 
         
-        return this.acc;
+        return list;
     }
 
     /**

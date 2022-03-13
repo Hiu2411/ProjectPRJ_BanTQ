@@ -1,12 +1,13 @@
 <%-- 
     Document   : Orderlist
-    Created on : Jul 19, 2020, 1:40:52 PM
-    Author     : DINH
+    Created on : April 20, 2022, 9:51:14 PM
+    Author     : hieuh
 --%>
 
 
 
 
+<%@page import="Model.Customer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Model.Admin"%>
 <%@page import="DAO.account_adminModel"%>
@@ -17,7 +18,7 @@
     String s = "";
     String sortColumn = "";
     String name = "";
-    ArrayList<Admin> list = aam.getPadding(p, s, sortColumn);
+    ArrayList<Customer> list = aam.getPadding(p, s, sortColumn);
     int sp_no = (p - 1) * 10;
 %>
 <!DOCTYPE html>
@@ -107,18 +108,12 @@
                         <th>Username</th>
                         <th>Email</th>
                         <th>Status</th>
-                        <th>
-                            <button type="button" class="btn btn-warning btn-sm"
-                                    onclick="location.href = 'admin-register.jsp?username=<%=name%>&s=<%=s%>&trang=<%=p%>'">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                        </th>
                     </tr>
                     </thead>
                     <tbody>
                         <%
                             String status;
-                            for (Admin acc : list) {
+                            for (Customer acc : list) {
                                 ++sp_no;
                                 if (acc.getStatus() == 1) {
                                     status = "<span class='glyphicon glyphicon-user text-success'></span>";
@@ -134,16 +129,6 @@
                             <td><%=acc.getUsername()%></td>                         
                             <td><%=acc.getEmail()%></td>
                             <td><%=status%></td>
-                            <td>
-                                
-                                <input hidden="" name="ID" value="<%=acc.getAdminId()%>">
-                                <button type="button" class="btn btn-default btn-sm btn-danger"
-                                        
-                                        onclick="if (confirm('Do you want do delete <%=acc.getUsername()%> ?'))
-                                                    location.href = 'AccountDelete'">
-                                    <span class="glyphicon glyphicon-trash "></span> 
-                                </button>
-                            </td>
                         </tr>
                         <%
                             }
